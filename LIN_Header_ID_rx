@@ -1,0 +1,35 @@
+/*
+This code segment refer to some contents from Microchip.
+Please note the license, if you use in your own project.
+*/
+
+/*
+Time: 6/2/18
+Name: DLC_from_LIN_ID()
+Function: get the Data_length_characters from LIN_ID segment.
+*/
+
+#define unsingned char  uc8
+
+uc8 DLC_from_LIN_ID(uc8 lin_id)
+{
+  uc8 lin_id_dlc = (lin_id & 0x30) >> 4;
+  
+  if(lin_id_dlc<2)
+  {
+    /* 2 bytes will be received.*/
+    lin_id_dlc = 2;
+  }
+  else if(lin_id_dlc==2)
+  {
+    /* 4 bytes will be received. */
+    lin_id_dlc = 4;
+  }
+  else
+  {
+    /* 8 bytes will be received. */
+    lin_id_dlc = 8;
+  }
+  
+  return lin_id_dlc;
+}
